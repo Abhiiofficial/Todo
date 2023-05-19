@@ -194,14 +194,15 @@ export const TodoList = () => {
           <div className="todo-title-row">
             <div className="todo-title-row1">
               <div className="todo-title">
-                <span className="todo-titele">
                   <span className="material-symbols-outlined love">
                     favorite
-                  </span>TODO
+                  </span>
+                <span className="todo-titele">
+                  TODO
                 </span>
               </div>
               <div className="todo-title" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
-                <span className="material-symbols-outlined account">
+                <span className="material-symbols-outlined account" onClick={()=>setHover(!hover)}>
                   account_circle
                 </span>
                 {hover &&
@@ -403,7 +404,7 @@ export const TodoList = () => {
         <Modal isOpen={modalOpen} onClose={closeModal} >
           <div className="modal-container">
             <div className="modal-row">
-              <span className="modal-title">EDIT TODO</span>
+              <span className="modal-title">EDIT TODO TITLE</span>
             </div>
             <div className="modal-row">
               <input maxLength={25} value={inputUpdatedata} type="text" className="add-todo-input" aria-label='add' placeholder='Add something !' onChange={(e) => setInputUpdatedata(e.currentTarget.value)} />
