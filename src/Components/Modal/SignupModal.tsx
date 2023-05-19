@@ -18,12 +18,15 @@ const SignupModal: React.FC<ModalProps> = ({ isOpen, onClose ,children}) => {
                     backgroundColor: 'rgba(0, 0, 0, 0.59)',
                 },
                 content: {
-                    width: '700px',
-                    height: '400px',
+                    minWidth: '250px', // Adjusted width for responsive view
+                    maxWidth: '700px', // Adjusted max-width for desktop view
+                    maxHeight: '360px',
+                    // minHeight:'100px',
                     margin: 'auto',
                     border: '1px solid #ccc',
                     borderRadius: '10px',
                     background: '#fff',
+                    overflow:'hidden'
                 },
             }}
         >

@@ -195,7 +195,9 @@ export const TodoList = () => {
             <div className="todo-title-row1">
               <div className="todo-title">
                 <span className="todo-titele">
-                  TODO
+                  <span className="material-symbols-outlined love">
+                    favorite
+                  </span>TODO
                 </span>
               </div>
               <div className="todo-title" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
@@ -207,7 +209,7 @@ export const TodoList = () => {
                     <div className="pop-title">
                       <div className="pop-title-div">
                         {AuthUser ?
-                          <span className="pop-title-name">{user?.email}</span>
+                          <span className="pop-title-name"><span className="welcome">Hi</span>, {user?.email}</span>
                           :
                           <span className="pop-title-name">Your Account</span>
                         }
@@ -297,11 +299,11 @@ export const TodoList = () => {
                         </div>
                         <div className="todo-item-center">
                           <span className="todo-item-name" style={{ textDecoration: todo?.isCompleted ? 'line-through' : 'none' }}>
-                            {todo?.todoName.slice(0, 25)}
+                            {todo?.todoName.slice(0, 15)}.
                           </span>
                         </div>
 
-                        <div className="todo-item-right">
+                        <div className="todo-item-right1">
                           {!AuthUser ?
                             <span title="Update todo" style={{ display: hoverIndex === todo?.id ? 'flex' : 'none' }} className="material-symbols-outlined todo-icon todo-icon1" onClick={() => setErrorModal(true)}>
                               update
@@ -318,6 +320,28 @@ export const TodoList = () => {
                             </span>
                             :
                             <span title="Remove" style={{ display: hoverIndex === todo?.id ? 'flex' : 'none' }} className="material-symbols-outlined todo-icon" onClick={() => { deleteTodo(todo.id); }}>
+                              cancel
+                            </span>
+                          }
+                        </div>
+
+                        <div className="todo-item-right2">
+                          {!AuthUser ?
+                            <span title="Update todo" className="material-symbols-outlined todo-icon todo-icon1" onClick={() => setErrorModal(true)}>
+                              update
+                            </span>
+                            :
+                            <span title="Update todo" className="material-symbols-outlined todo-icon todo-icon1" onClick={() => { openModal(); setSelectedTodo(todo?.id) }}>
+                              update
+                            </span>
+                          }
+
+                          {!AuthUser ?
+                            <span title="Remove" className="material-symbols-outlined todo-icon" onClick={() => setErrorModal(true)}>
+                              cancel
+                            </span>
+                            :
+                            <span title="Remove" className="material-symbols-outlined todo-icon" onClick={() => { deleteTodo(todo.id); }}>
                               cancel
                             </span>
                           }

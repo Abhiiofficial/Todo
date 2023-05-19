@@ -17,8 +17,10 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose ,children}) => {
                     backgroundColor: 'rgba(0, 0, 0, 0.59)',
                 },
                 content: {
-                    width: '440px',
-                    height: '280px',
+                    maxWidth:'350px',
+                    minWidth: '246px',
+                    maxHeight:'250px',
+                    minHeight: '100px',
                     margin: 'auto',
                     border: '1px solid #ccc',
                     borderRadius: '10px',
