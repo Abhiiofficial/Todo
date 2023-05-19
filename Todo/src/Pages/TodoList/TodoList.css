@@ -1,0 +1,447 @@
+  .todo-container {
+    height: 100vh;
+    align-items: center;
+    display: block;
+    background-position: center;
+    justify-content: flex-end;
+    padding: 100px;
+    background-size: cover;
+    background-image: linear-gradient(to right, rgba(241, 82, 255, 0.5), rgba(142, 42, 189, 0.5)), url('https://www.shutterstock.com/image-photo/aerial-view-airplane-blue-snow-260nw-1952778829.jpg');
+  }
+
+  .Toastify__toast {
+    border-radius: 8px;
+  }
+
+
+  @media (min-height: 600px) {
+    .todo-container {
+      height: 10vh;
+    }
+  }
+
+  .toast-message{
+    color: #ffff;
+  }
+
+  .todo-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: transparent;
+    /* background-image: linear-gradient(to right, rgba(241, 82, 255, 0.5), rgba(142, 42, 189, 0.5)); */
+    transform: translate(-50%, -50%);
+    height: 500px;
+    width: 450px;
+  }
+
+  .todo-input-row {
+    position: relative;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 15px 25px;
+    gap: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .emoji-box{
+    top:15%;
+    left: 45%;
+    z-index: 99999;
+    transform: translate(-45%, 5%);
+    background-color: #ffffff;
+    position: absolute;
+    border-radius: 10px;
+    z-index: 9999;
+    margin-top: 40px;
+    object-fit: contain;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: start;
+    box-shadow: 0px 5px 10px #afafaf;
+  }
+
+  .todo-title {
+    position: relative;
+  }
+
+  .todo-title-row1 {
+    display: flex;
+    padding: 0px 10px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .todo-pop {
+    top: -10px;
+    left: 0%;
+    z-index: 99999;
+    transform: translate(-45%, 5%);
+    background-color: #ffffff;
+    position: absolute;
+    border-radius: 10px;
+    z-index: 9999;
+    margin-top: 40px;
+    width: 250px;
+    object-fit: contain;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: start;
+    box-shadow: 0px 5px 10px #afafaf;
+  }
+
+  .pop-title {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .pop-login {
+    width: 250px;
+    padding: 10px;
+    border: none;
+    background-color: #00a8a8;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .pop-signup {
+    width: 250px;
+    padding: 10px;
+    border: none;
+    background-color: rgb(190, 255, 255);
+    border-radius: 8px;
+    color: rgb(0, 167, 167);
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .pop-logout {
+    width: 250px;
+    padding: 10px;
+    border: none;
+    background-color:rgb(255, 158, 158);
+    border-radius: 8px;
+    color: rgb(201, 0, 0);
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .error{
+    font-size: 17px;
+    color: red;
+  }
+
+  .pop-signup:hover {
+    background-color: #00a8a8;
+    color: #fff;
+  }
+
+  .hr-pop {
+    border: none;
+    height: 1px;
+    width: 100%;
+    background-color: #dbdbdb;
+    text-align: center;
+  }
+
+  .pop-title-name {
+    font-size: 20px;
+    text-transform: uppercase;
+  }
+
+  .pop-sub {
+    font-size: 15px;
+    color: #686868;
+  }
+
+  .account {
+    font-size: 33px;
+    color: #dbdbdb;
+    cursor: pointer;
+  }
+
+  .todo-titele {
+    font-size: 40px;
+    color: #fff;
+    font-weight: 700;
+    font-family: "Lato", sans-serif;
+    line-height: 1.71;
+    letter-spacing: 4.24px;
+  }
+
+  .todo-input-item-1 {
+    flex: 11;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .todo-input-item-2 {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .todo-input-item-3 {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .todo-input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    font-family: "Lato", sans-serif;
+    line-height: 1.71;
+    letter-spacing: 2.24px;
+  }
+
+  .todo-input::placeholder {
+    font-size: 18px;
+    font-family: "Lato", sans-serif;
+    line-height: 1.71;
+    letter-spacing: 2.24px;
+  }
+
+  .send-icon {
+    font-size: 30px;
+    cursor: pointer;
+    color: #868686;
+  }
+
+  .todo-items-box {
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 2px 10px #afafaf;
+  }
+
+  .todo-col {
+    flex: 10;
+    height: 450px;
+    overflow-y: auto;
+  }
+
+  .todo-actions {
+    flex: 2;
+    height: 30px;
+    display: flex;
+    padding: 0px 10px;
+    gap: 20px;
+    align-items: center;
+    justify-content: start;
+
+  }
+
+  .action-row {
+    display: flex;
+  }
+
+  .count {
+    margin-left: 10px;
+    margin-top: 10px;
+    color: #888888;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .todo-add {
+    cursor: pointer;
+    font-size: 27px;
+  }
+
+
+  .todo-item-container {
+    padding: 15px;
+    display: flex;
+    gap: 10px;
+
+  }
+
+  .todo-item-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+  }
+
+  .todo-item-center {
+    flex: 8;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+  }
+
+  .todo-item-right {
+    flex: 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+
+  .hr-todo {
+    border: none;
+    height: 1px;
+    background-color: #dbdbdb;
+    margin: 5px 20px;
+    text-align: center;
+  }
+
+  .todo-icon {
+    color: #858585;
+    cursor: pointer;
+    transform: all ease 2s;
+  }
+
+  .todo-icon1 {
+    color: #858585;
+    cursor: pointer;
+    font-size: 27px;
+    transform: all ease 2s;
+  }
+
+  .todo-icon:hover {
+    transform: scale(1.07);
+  }
+
+  .modal-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .modal-title {
+    font-family: lato sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+  }
+
+  .add-todo-input {
+    width: 300px;
+    border-radius: 8px;
+    padding: 15px;
+    font-size: 16px;
+  }
+
+  .add-todo-input::placeholder {
+    font-size: 16px;
+  }
+
+  .add-todo {
+    padding: 10px;
+    width: 330px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 20px;
+    border: none;
+    background-color: rgb(0, 180, 180);
+  }
+
+  .signup-modal-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .add-name {
+    color: #fff;
+  }
+
+  .signup {
+    height: 350px;
+    margin-top: 20px;
+    object-fit: cover;
+  }
+
+  .signup-left {
+    flex: 6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .signup-right {
+    flex: 6;
+    padding: 30px;
+  }
+
+  .signup-col {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .signup-input{
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .signup-title{
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .input-signup {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 8px;
+    border: 1px solid #6C63FF;
+    outline: 1px solid #63ffff;
+  }
+
+  .signup-button {
+    width: 250px;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 20px;
+    cursor: pointer;
+    border: none;
+    background-color: #6C63FF;
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+  }
+
+  .signup-input-action-name{
+    font-size: 14px;
+
+  }
+
+  .high{
+    cursor: pointer;
+    font-weight: 600;
+  }
