@@ -104,7 +104,6 @@ export const TodoList = () => {
   }, []);
 
   const AuthUser = localStorage.getItem('user')
-  console.log(user)
 
   const handleAddTodo = () => {
 
@@ -280,10 +279,10 @@ export const TodoList = () => {
 
           <div className="todo-items-box">
             <div className="todo-col">
-              {todos && todos.map((todo) => (
-                <>
+              {todos && todos.map((todo, index) => (
+                <div key={index}>
                   {todo ?
-                    <>
+                    <div>
                       <div className='todo-item-container' onMouseEnter={() => setHoverIndex(todo?.id)} onMouseLeave={() => setHoverIndex(0)}>
                         <div className="todo-item-left">
                           {todo?.isCompleted ?
@@ -326,7 +325,7 @@ export const TodoList = () => {
 
                       </div >
                       <hr className='hr-todo' />
-                    </>
+                    </div>
                     :
                     <div className="">
                       <span className="todo-item-name">
@@ -334,7 +333,7 @@ export const TodoList = () => {
                       </span>
                     </div>
                   }
-                </>
+                </div>
               ))}
             </div>
             <div className="todo-actions">
@@ -371,6 +370,9 @@ export const TodoList = () => {
                   <span className="count" onClick={clearCompletedTodos}>Clear completed</span>
                 }
               </div>
+            </div>
+            <div className='footer'>
+              <span className="made-with">Made with &#x1F49D;</span>
             </div>
           </div>
         </div>

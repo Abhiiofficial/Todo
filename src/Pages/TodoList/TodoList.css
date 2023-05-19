@@ -13,6 +13,16 @@
     border-radius: 8px;
   }
 
+.made-with{
+  font-size: 12px;
+}
+
+  .footer {
+
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
 
   @media (min-height: 600px) {
     .todo-container {
@@ -20,7 +30,7 @@
     }
   }
 
-  .toast-message{
+  .toast-message {
     color: #ffff;
   }
 
@@ -50,8 +60,8 @@
     justify-content: center;
   }
 
-  .emoji-box{
-    top:15%;
+  .emoji-box {
+    top: 15%;
     left: 45%;
     z-index: 99999;
     transform: translate(-45%, 5%);
@@ -134,7 +144,7 @@
     width: 250px;
     padding: 10px;
     border: none;
-    background-color:rgb(255, 158, 158);
+    background-color: rgb(255, 158, 158);
     border-radius: 8px;
     color: rgb(201, 0, 0);
     font-size: 17px;
@@ -142,7 +152,7 @@
     cursor: pointer;
   }
 
-  .error{
+  .error {
     font-size: 17px;
     color: red;
   }
@@ -402,14 +412,14 @@
     gap: 10px;
   }
 
-  .signup-input{
+  .signup-input {
     width: 250px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  .signup-title{
+  .signup-title {
     font-size: 20px;
     margin-bottom: 10px;
   }
@@ -436,12 +446,12 @@
     font-size: 18px;
   }
 
-  .signup-input-action-name{
+  .signup-input-action-name {
     font-size: 14px;
 
   }
 
-  .high{
+  .high {
     cursor: pointer;
     font-weight: 600;
   }

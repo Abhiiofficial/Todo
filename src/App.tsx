@@ -1,11 +1,11 @@
-import  {TodoList}  from "./Pages/TodoList/TodoList"
+import { TodoList } from "./Pages/TodoList/TodoList"
 
 function App() {
 
 
   return (
     <>
-    <TodoList/>
+      <TodoList />
     </>
   )
 }
