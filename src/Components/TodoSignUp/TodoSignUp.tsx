@@ -32,6 +32,7 @@ const TodoSignUp: React.FC<TodoSignUpProps> = ({ getMode }) => {
                     <div className="signup-form">
                         <div className="signup-input-row">
                             <TextField
+                            value={username}
                                 onChange={(e) => setUsername(e.currentTarget.value)}
                                 InputProps={{
                                     sx: {
@@ -46,6 +47,7 @@ const TodoSignUp: React.FC<TodoSignUpProps> = ({ getMode }) => {
                         </div>
                         <div className="signup-input-row">
                             <TextField
+                            value={password}
                                 onChange={(e) => setPassword(e.currentTarget.value)}
                                 className='signup-input'
                                 required
@@ -69,6 +71,7 @@ const TodoSignUp: React.FC<TodoSignUpProps> = ({ getMode }) => {
                         </div>
                         <div className="signup-input-row">
                             <TextField
+                            value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.currentTarget.value)}
                                 className='signup-input'
                                 required

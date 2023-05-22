@@ -13,6 +13,8 @@ function Todo() {
     setInputValue((prevValue) => prevValue + emojiData.emoji);
   }
 
+  console.log(selectedEmoji)
+
 
   return (
     <div className='todo-list'>
