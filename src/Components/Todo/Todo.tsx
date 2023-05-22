@@ -288,7 +288,7 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
                 <EmojiPicker height={370} onEmojiClick={onClick} />
               </div> */}
               <div className="emoji-picker-container" >
-                <EmojiPicker height={400} width={305} onEmojiClick={onClick} />
+                <EmojiPicker height={400} width={300} onEmojiClick={onClick} />
               </div>
             </>
           }
@@ -298,7 +298,7 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
             <div className="todo-info-row">
               <div className="todo-info-left">
                 <div className="info-left">
-                  <span className="info">All Tasks: <button className="info-count-left">1</button></span>
+                  <span className="info">All Tasks: <button className="info-count-left">{todosCount}</button></span>
                 </div>
               </div>
               <div className="todo-info-right">

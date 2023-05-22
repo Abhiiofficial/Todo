@@ -197,27 +197,9 @@
     justify-content: end;
 }
 
-.emoji-picker-container-one {
-    margin-top: 15px;
-    left: -5px;
-    transform: translate(0%, -0%);
-    width: 365px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    --epr-bg-color: red;
-    position: absolute;
-}
-
-@media only screen and (max-width: 767px) {
-    .emoji-picker-container-one {
-        display: none;
-    }
-}
-
 .emoji-picker-container {
     margin-top: 15px;
-    left: -5px;
+    left: -10px;
     display: none;
     transform: translate(0%, -0%);
     width: 365px;
@@ -231,6 +213,7 @@
 @media only screen and (max-width: 767px) {
     .emoji-picker-container {
         display: flex;
+  transform: translate(-10%, -0%);
     }
 }
 
