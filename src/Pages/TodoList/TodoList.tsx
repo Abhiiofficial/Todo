@@ -17,7 +17,7 @@ const TodoList = () => {
       </div>
       {mode === 'login' && <TodoLogin getMode={getMode}/>}
       {mode === 'signup' && <TodoSignUp getMode={getMode}/>}
-      {mode === 'todo' && <Todo />}
+      {mode === 'todo' && <Todo getMode={getMode}/>}
     </div>
   )
 }

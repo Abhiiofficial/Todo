@@ -1,6 +1,7 @@
 import TodoList from "./Pages/TodoList/TodoList"
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { green, red } from '@mui/material/colors';
+import { Toaster } from "react-hot-toast";
 
 const theme = createTheme({
   palette: {
@@ -20,6 +21,7 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <TodoList />
+        <Toaster />
       </ThemeProvider>
     </>
   )
