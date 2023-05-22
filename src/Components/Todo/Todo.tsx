@@ -8,7 +8,7 @@ function Todo() {
   const [selectedEmoji, setSelectedEmoji] = useState<string>("");
   const [inputValue, setInputValue] = useState<string>("");
 
-  function onClick(emojiData: EmojiClickData, event: MouseEvent) {
+  function onClick(emojiData: EmojiClickData) {
     setSelectedEmoji(emojiData.unified);
     setInputValue((prevValue) => prevValue + emojiData.emoji);
   }
