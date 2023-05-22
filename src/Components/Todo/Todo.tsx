@@ -310,7 +310,7 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
             {/* <hr className='hr-todo'/> */}
             <div className="todo-item-row">
               {todos && todos.map((todo, index) => (
-                <TodoItem isCompleted={isCompleted} onComplete={handleComplete} onDelete={handledelete} getMode={getMode} todo={todo} key={index} />
+                <TodoItem onComplete={handleComplete} onDelete={handledelete} getMode={getMode} todo={todo} key={index} />
               ))}
             </div>
 
