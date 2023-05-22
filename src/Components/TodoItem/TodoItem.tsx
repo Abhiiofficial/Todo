@@ -1,8 +1,4 @@
-import { useEffect, useState } from 'react';
 import './TodoItem.css'
-import Cookies from 'js-cookie';
-import axios from 'axios';
-import { toast } from 'react-hot-toast';
 
 interface TodoItemProps {
   todo: {
@@ -19,12 +15,10 @@ interface TodoItemProps {
   getMode: (data: string) => void;
   onDelete: (id: string) => void;
   onComplete: (id: string) => void;
-  isCompleted: boolean;
 }
 
-function TodoItem({ todo, getMode, onDelete, onComplete, isCompleted }: TodoItemProps) {
+function TodoItem({ todo, onDelete, onComplete }: TodoItemProps) {
 
-  const [completed, setCompleted] = useState(todo?.isCompleted)
   // const handleLogout = () => {
   //   Cookies.remove('todo_token')
   //   toast.success('logged out successful', {
@@ -44,7 +38,6 @@ function TodoItem({ todo, getMode, onDelete, onComplete, isCompleted }: TodoItem
   // }
 
 
-  const token = Cookies.get('todo_token')
 
   const handleDelete = () => {
     console.log(todo?._id)

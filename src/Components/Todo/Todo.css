@@ -172,6 +172,9 @@
     .todo-input {
         font-size: 14px;
         margin-left: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
 
@@ -227,7 +230,7 @@
 
 @media only screen and (max-width: 767px) {
     .emoji-picker-container {
-        display: block;
+        display: flex;
     }
 }
 

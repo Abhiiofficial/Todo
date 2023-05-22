@@ -264,7 +264,7 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
               </div>
               <div className="new-task-center">
                 <div className="new-task-input">
-                  <input value={inputValue} onChange={handleTodoChange} type="text" className='todo-input' placeholder='Add a new task ! Eg: Coding, Hacking' />
+                  <input value={inputValue} onChange={handleTodoChange} type="text" className='todo-input' placeholder='Add a new task ! Eg: Coding, Hacking...' />
                 </div>
               </div>
               <div className="new-task-right">
@@ -284,9 +284,9 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
           </form>
           {showPicker &&
             <>
-              <div className="emoji-picker-container-one" >
+              {/* <div className="emoji-picker-container-one" >
                 <EmojiPicker height={370} onEmojiClick={onClick} />
-              </div>
+              </div> */}
               <div className="emoji-picker-container" >
                 <EmojiPicker height={400} width={305} onEmojiClick={onClick} />
               </div>

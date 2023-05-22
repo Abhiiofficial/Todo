@@ -23,6 +23,8 @@ const TodoSignUp: React.FC<TodoSignUpProps> = ({ getMode }) => {
         setUsername(e.target.value);
     };
 
+    console.log(passwordMatch)
+
     const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
         setPassword(e.target.value);
         setPasswordMatch(e.target.value === confirmPassword);
