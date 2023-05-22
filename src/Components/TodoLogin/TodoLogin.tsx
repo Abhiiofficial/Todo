@@ -49,7 +49,6 @@ const TodoLogin: React.FC<TodoLoginProps> = ({ getMode }) => {
                 username,
                 password
             });
-            console.log(response)
             if (response.data.statusCode === 200) {
                 toast.success('Login successful', {
                     position: 'top-center',

@@ -19,7 +19,7 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
   const [loading, setLoading] = useState(false);
   const [todos, setTodos] = useState([]);
   const [todosCount, setTodoscount] = useState(0);
-  const [isCompleted, setIsCompleted] = useState(false)
+  const [doneCount, setDonecount] = useState(0);
 
   function onClick(emojiData: EmojiClickData) {
     setSelectedEmoji(emojiData.unified);
@@ -63,9 +63,9 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
             Authorization: "Bearer " + token
           }
         });
-        console.log(response.data.data);
-        setTodoscount(response.data.count)
-        setTodos(response.data.data)
+        setDonecount(response?.data.doneCount)
+        setTodoscount(response?.data.count)
+        setTodos(response?.data.data)
       } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
           if (error.response?.data.statusCode === 401) {
@@ -91,17 +91,9 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
     const value = event.target.value;
 
     // Validate the todo input
-    if (value.match(/[.,/{}[\]<>\s]/)) {
+    if (value.match(/^[/.,{}[\]<>\s]+$/)) {
       setError(true);
       toast.error('Invalid characters are not allowed.', {
-        position: 'top-center',
-        style: {
-          border: '1px soild red'
-        }
-      })
-    } else if (value.trim() === '') {
-      setError(true);
-      toast.error('Todo cannot be empty.', {
         position: 'top-center',
         style: {
           border: '1px soild red'
@@ -130,7 +122,6 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
           Authorization: "Bearer " + token
         }
       });
-      console.log(response)
       if (response) {
         toast.success('Todo Created.', {
           style: {
@@ -176,11 +167,11 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
             Authorization: "Bearer " + token
           }
         });
-        fetchData()
-        console.log(response.data);
+        if (response) {
+          fetchData()
+        }
       } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
-          console.log(error.response)
           if (error.response?.data.statusCode === 401) {
             handleLogout()
             toast.error('Token Expired.', {
@@ -209,9 +200,10 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
             Authorization: "Bearer " + token
           }
         });
-        console.log(response.data);
-        fetchData()
-        setIsCompleted(response.data.isCompleted)
+        if (response) {
+          fetchData()
+          setDonecount(doneCount + 1)
+        }
       } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
           if (error.response?.data.statusCode === 401) {
@@ -234,7 +226,123 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
     }
   };
 
-  console.log(isCompleted)
+  const handlegetTodo = async (getValue: string) => {
+    if (token) {
+      try {
+        const response = await axios.get(`https://love-todo-app.onrender.com/api/v1/user/getActiveTodo?isCompleted=` + getValue, {
+          headers: {
+            Authorization: "Bearer " + token
+          }
+        });
+        setDonecount(response?.data.doneCount)
+        setTodoscount(response?.data.count)
+        setTodos(response?.data.data)
+      } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+          if (error.response?.data.statusCode === 401) {
+            handleLogout()
+            changeMode
+            toast.error('Token Expired.', {
+              style: {
+                border: '1px solid #713200',
+                padding: '16px',
+                color: '#713200',
+              },
+              iconTheme: {
+                primary: '#713200',
+                secondary: '#FFFAEE',
+              },
+            });
+          }
+        }
+      }
+    }
+  };
+
+  const handleClearCompleted = async () => {
+    if (token) {
+      try {
+        const response = await axios.delete(`https://love-todo-app.onrender.com/api/v1/user/deleteCompleted`, {
+          headers: {
+            Authorization: "Bearer " + token
+          }
+        });
+        fetchData()
+        toast.success(response?.data?.message, {
+          style: {
+            border: '1px solid #713200',
+            padding: '16px',
+            color: '#713200',
+          },
+          iconTheme: {
+            primary: '#713200',
+            secondary: '#FFFAEE',
+          },
+        });
+      } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+          if (error.response?.data.statusCode === 401) {
+            handleLogout()
+            changeMode
+            toast.error('Token Expired.', {
+              style: {
+                border: '1px solid #713200',
+                padding: '16px',
+                color: '#713200',
+              },
+              iconTheme: {
+                primary: '#713200',
+                secondary: '#FFFAEE',
+              },
+            });
+          }
+        }
+      }
+    }
+  };
+
+  const handleClearAll = async () => {
+    if (token) {
+      try {
+        const response = await axios.delete(`https://love-todo-app.onrender.com/api/v1/user/deleteAll`, {
+          headers: {
+            Authorization: "Bearer " + token
+          }
+        });
+        fetchData()
+        toast.success(response?.data?.message, {
+          style: {
+            border: '1px solid #713200',
+            padding: '16px',
+            color: '#713200',
+          },
+          iconTheme: {
+            primary: '#713200',
+            secondary: '#FFFAEE',
+          },
+        });
+      } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+          if (error.response?.data.statusCode === 401) {
+            handleLogout()
+            changeMode
+            toast.error('Token Expired.', {
+              style: {
+                border: '1px solid #713200',
+                padding: '16px',
+                color: '#713200',
+              },
+              iconTheme: {
+                primary: '#713200',
+                secondary: '#FFFAEE',
+              },
+            });
+          }
+        }
+      }
+    }
+  };
+
 
   return (
     <div className='todo-list'>
@@ -303,7 +411,7 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
               </div>
               <div className="todo-info-right">
                 <div className="info-right">
-                  <span className="info">Completed Tasks: <button className="info-count">1 of 9</button></span>
+                  <span className="info">Completed Tasks: <button className="info-count">{doneCount} of {todosCount}</button></span>
                 </div>
               </div>
             </div>
@@ -316,21 +424,21 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
 
             <div className="todo-action-row">
               <div className="action-left">
-                <span className="actions">CLEAR ALL</span>
+                <span className="actions" onClick={handleClearAll}>CLEAR ALL</span>
               </div>
               <div className="action-center">
                 <div className="action-center-item">
-                  <span className="actions">ALL TASKS</span>
+                  <span className="actions" onClick={fetchData}>ALL TASKS</span>
                 </div>
                 <div className="action-center-item">
-                  <span className="actions">ACTIVE</span>
+                  <span className="actions" onClick={() => handlegetTodo('false')}>ACTIVE</span>
                 </div>
                 <div className="action-center-item">
-                  <span className="actions">COMPLETED</span>
+                  <span className="actions" onClick={() => handlegetTodo('true')}>COMPLETED</span>
                 </div>
               </div>
               <div className="action-right">
-                <span className="actions">CLEAR COMPLETED</span>
+                <span className="actions" onClick={handleClearCompleted}>CLEAR COMPLETED</span>
               </div>
             </div>
           </div>

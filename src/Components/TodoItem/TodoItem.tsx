@@ -40,12 +40,10 @@ function TodoItem({ todo, onDelete, onComplete }: TodoItemProps) {
 
 
   const handleDelete = () => {
-    console.log(todo?._id)
     onDelete(todo?._id);
   };
 
   const handleComplete = () => {
-    console.log(todo?._id)
     onComplete(todo?._id)
   }
 
@@ -68,7 +66,7 @@ function TodoItem({ todo, onDelete, onComplete }: TodoItemProps) {
         </div>
         <div className="todo-item-center">
           <div className="todo-title-row">
-            <span className={todo?.isCompleted ? "title-complete" : "title"}>{todo?.todoTitle}</span>
+            <span className={todo?.isCompleted ? "title-complete" : "title"}>{todo?.todoTitle.slice(0,25)}</span>
           </div>
           <div className="todo-time-row">
             <div className="time-row">
