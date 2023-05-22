@@ -288,7 +288,7 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
                 <EmojiPicker height={370} onEmojiClick={onClick} />
               </div> */}
               <div className="emoji-picker-container" >
-                <EmojiPicker height={400} width={300} onEmojiClick={onClick} />
+                <EmojiPicker height={400} width={285} onEmojiClick={onClick} />
               </div>
             </>
           }
