@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import { CircularProgress } from '@mui/material';
+import FooterRow from '../Footer/Footer';
 
 interface TodoProps {
   getMode: (data: string) => void;
@@ -514,6 +515,7 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
           </div>
         }
       </div>
+      <FooterRow/>
     </div>
   )
 }
