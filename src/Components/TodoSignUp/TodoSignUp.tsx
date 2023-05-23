@@ -6,6 +6,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useState, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import { motion } from 'framer-motion'
 
 interface TodoSignUpProps {
     getMode: (data: string) => void;
@@ -65,13 +66,13 @@ const TodoSignUp: React.FC<TodoSignUpProps> = ({ getMode }) => {
                 setLoading(false)
                 changeMode()
             }
-        } catch (error:unknown) {
+        } catch (error: unknown) {
             setLoading(false)
-            if(error){
+            if (error) {
                 toast.error('Signup failed !', {
                     position: 'top-center',
-                    style:{
-                        border:'1px solid red'
+                    style: {
+                        border: '1px solid red'
                     }
                 })
             }
@@ -79,96 +80,102 @@ const TodoSignUp: React.FC<TodoSignUpProps> = ({ getMode }) => {
     };
 
     return (
-        <div className="todo-signup-component">
-            <div className="todo-signup-left">
-                <div className="todo-signup">
-                    <img src={signup} alt="" className="todo-signup-image" />
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+        >
+            <div className="todo-signup-component">
+                <div className="todo-signup-left">
+                    <div className="todo-signup">
+                        <img src={signup} alt="" className="todo-signup-image" />
+                    </div>
                 </div>
-            </div>
-            <hr className="vertical-hr " />
-            <div className="todo-signup-right">
+                <hr className="vertical-hr " />
+                <div className="todo-signup-right">
                     <form onSubmit={handleSubmit}>
-                <div className="signup-col">
-                        <div className="signup-title">
-                            <span className="signup-title-name">SIGN-UP</span>
-                        </div>
-                        <div className="signup-form">
-                            <div className="signup-input-row">
-                                <TextField
-                                    value={username}
-                                    onChange={handleEmailChange}
-                                    InputProps={{
-                                        sx: {
-                                            borderRadius: '35px',
-                                            padding: '2px 5px'
-                                        },
-                                    }}
-                                    className='signup-input'
-                                    required
-                                    label='Username'
-                                    type='text' />
+                        <div className="signup-col">
+                            <div className="signup-title">
+                                <span className="signup-title-name">SIGN-UP</span>
                             </div>
-                            <div className="signup-input-row">
-                                <TextField
-                                    value={password}
-                                    onChange={handlePasswordChange}
-                                    className='signup-input'
-                                    required
-                                    label='Password'
-                                    type={!visible ? 'password' : 'text'}
-                                    InputProps={{
-                                        sx: {
-                                            borderRadius: '35px',
-                                            padding: '2px 5px'
-                                        },
-                                        endAdornment: (
-                                            <InputAdornment position="start">
-                                                {visible ?
-                                                    <Visibility className='ey-icon' onClick={() => setVisible(false)} />
-                                                    :
-                                                    <VisibilityOff className='ey-icon' onClick={() => setVisible(true)} />
-                                                }
-                                            </InputAdornment>
-                                        ),
-                                    }} />
-                            </div>
-                            <div className="signup-input-row">
-                                <TextField
-                                    value={confirmPassword}
-                                    onChange={handleConfirmPasswordChange}
-                                    className='signup-input'
-                                    required
-                                    label='Confirm Password'
-                                    type='password' InputProps={{
-                                        sx: {
-                                            borderRadius: '35px',
-                                            padding: '2px 5px'
-                                        },
-                                        // endAdornment: (
-                                        //     <InputAdornment position="start">
-                                        //         <Visibility />
-                                        //     </InputAdornment>
-                                        // ),
-                                    }} />
-                            </div>
-                            {!loading ?
-                            <div className="signup-input-row">
-                                <button type='submit' className="signup">SIGN-UP</button>
-                            </div>
-                            :
-                            <div className="signup-input-row">
-                                <button  className="signup-loading">Please wait...  <CircularProgress size="1em" sx={{color:'red'}}/></button>
-                            </div>
-                            }
+                            <div className="signup-form">
+                                <div className="signup-input-row">
+                                    <TextField
+                                        value={username}
+                                        onChange={handleEmailChange}
+                                        InputProps={{
+                                            sx: {
+                                                borderRadius: '35px',
+                                                padding: '2px 5px'
+                                            },
+                                        }}
+                                        className='signup-input'
+                                        required
+                                        label='Username'
+                                        type='text' />
+                                </div>
+                                <div className="signup-input-row">
+                                    <TextField
+                                        value={password}
+                                        onChange={handlePasswordChange}
+                                        className='signup-input'
+                                        required
+                                        label='Password'
+                                        type={!visible ? 'password' : 'text'}
+                                        InputProps={{
+                                            sx: {
+                                                borderRadius: '35px',
+                                                padding: '2px 5px'
+                                            },
+                                            endAdornment: (
+                                                <InputAdornment position="start">
+                                                    {visible ?
+                                                        <Visibility className='ey-icon' onClick={() => setVisible(false)} />
+                                                        :
+                                                        <VisibilityOff className='ey-icon' onClick={() => setVisible(true)} />
+                                                    }
+                                                </InputAdornment>
+                                            ),
+                                        }} />
+                                </div>
+                                <div className="signup-input-row">
+                                    <TextField
+                                        value={confirmPassword}
+                                        onChange={handleConfirmPasswordChange}
+                                        className='signup-input'
+                                        required
+                                        label='Confirm Password'
+                                        type='password' InputProps={{
+                                            sx: {
+                                                borderRadius: '35px',
+                                                padding: '2px 5px'
+                                            },
+                                            // endAdornment: (
+                                            //     <InputAdornment position="start">
+                                            //         <Visibility />
+                                            //     </InputAdornment>
+                                            // ),
+                                        }} />
+                                </div>
+                                {!loading ?
+                                    <div className="signup-input-row">
+                                        <button type='submit' className="signup">SIGN-UP</button>
+                                    </div>
+                                    :
+                                    <div className="signup-input-row">
+                                        <button className="signup-loading">Please wait...  <CircularProgress size="1em" sx={{ color: 'red' }} /></button>
+                                    </div>
+                                }
 
-                            <div className="signup-input-row">
-                                <span className="sign-nav">Already have an account ? <span className="sign-high" onClick={() => getMode('login')}>LOGIN</span></span>
+                                <div className="signup-input-row">
+                                    <span className="sign-nav">Already have an account ? <span className="sign-high" onClick={() => getMode('login')}>LOGIN</span></span>
+                                </div>
                             </div>
                         </div>
-                </div>
                     </form>
+                </div>
             </div>
-        </div>
+        </motion.div>
     )
 }
 

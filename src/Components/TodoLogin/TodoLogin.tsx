@@ -7,6 +7,7 @@ import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { motion } from 'framer-motion'
 
 interface TodoLoginProps {
     getMode: (data: string) => void;
@@ -81,72 +82,78 @@ const TodoLogin: React.FC<TodoLoginProps> = ({ getMode }) => {
     };
 
     return (
-        <div className="todo-login-component">
-            <div className="todo-login-left">
-                <div className="todo-login">
-                    <img src={login} alt="" className="todo-login-image" />
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+        >
+            <div className="todo-login-component">
+                <div className="todo-login-left">
+                    <div className="todo-login">
+                        <img src={login} alt="" className="todo-login-image" />
+                    </div>
+                </div>
+                <hr className="vertical-hr " />
+                <div className="todo-login-right">
+                    <form action="" onSubmit={handleSubmit}>
+                        <div className="login-col">
+                            <div className="login-title">
+                                <span className="login-title-name">LOGIN</span>
+                            </div>
+                            <div className="login-form">
+                                <div className="login-input-row">
+                                    <TextField
+                                        onChange={handleEmailChange}
+                                        InputProps={{
+                                            sx: {
+                                                borderRadius: '35px',
+                                                padding: '2px 5px'
+                                            },
+                                        }}
+                                        className='login-input'
+                                        required
+                                        label='Username'
+                                        type='text' />
+                                </div>
+                                <div className="login-input-row">
+                                    <TextField
+                                        onChange={handlePasswordChange}
+                                        className='login-input'
+                                        required
+                                        label='Password'
+                                        type={!visible ? 'password' : 'text'} InputProps={{
+                                            sx: {
+                                                borderRadius: '35px',
+                                                padding: '2px 5px'
+                                            },
+                                            endAdornment: (
+                                                <InputAdornment position="start">
+                                                    {visible ? <VisibilityOff className='eye-icon' onClick={() => setVisible(false)} />
+                                                        :
+                                                        <Visibility className='eye-icon' onClick={() => setVisible(true)} />
+                                                    }
+                                                </InputAdornment>
+                                            ),
+                                        }} />
+                                </div>
+                                {!loading ?
+                                    <div className="login-input-row">
+                                        <button type='submit' className="login">LOGIN</button>
+                                    </div>
+                                    :
+                                    <div className="login-input-row">
+                                        <button className="login-loading">Please wait... <CircularProgress size='1em' sx={{ color: 'red' }} /></button>
+                                    </div>
+                                }
+                                <div className="login-input-row">
+                                    <span className="sign-nav">New user ? <span className="sign-high" onClick={() => getMode('signup')}>SIGN-UP</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <hr className="vertical-hr " />
-            <div className="todo-login-right">
-                <form action="" onSubmit={handleSubmit}>
-                    <div className="login-col">
-                        <div className="login-title">
-                            <span className="login-title-name">LOGIN</span>
-                        </div>
-                        <div className="login-form">
-                            <div className="login-input-row">
-                                <TextField
-                                    onChange={handleEmailChange}
-                                    InputProps={{
-                                        sx: {
-                                            borderRadius: '35px',
-                                            padding: '2px 5px'
-                                        },
-                                    }}
-                                    className='login-input'
-                                    required
-                                    label='Username'
-                                    type='text' />
-                            </div>
-                            <div className="login-input-row">
-                                <TextField
-                                    onChange={handlePasswordChange}
-                                    className='login-input'
-                                    required
-                                    label='Password'
-                                    type={!visible ? 'password' : 'text'} InputProps={{
-                                        sx: {
-                                            borderRadius: '35px',
-                                            padding: '2px 5px'
-                                        },
-                                        endAdornment: (
-                                            <InputAdornment position="start">
-                                                {visible ? <VisibilityOff className='eye-icon' onClick={() => setVisible(false)} />
-                                                    :
-                                                    <Visibility className='eye-icon' onClick={() => setVisible(true)} />
-                                                }
-                                            </InputAdornment>
-                                        ),
-                                    }} />
-                            </div>
-                            {!loading ?
-                                <div className="login-input-row">
-                                    <button type='submit' className="login">LOGIN</button>
-                                </div>
-                                :
-                                <div className="login-input-row">
-                                    <button className="login-loading">Please wait... <CircularProgress size='1em' sx={{ color: 'red' }} /></button>
-                                </div>
-                            }
-                            <div className="login-input-row">
-                                <span className="sign-nav">New user ? <span className="sign-high" onClick={() => getMode('signup')}>SIGN-UP</span></span>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+        </motion.div>
     )
 }
 

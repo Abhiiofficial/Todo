@@ -7,6 +7,7 @@ import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import { CircularProgress } from '@mui/material';
 import FooterRow from '../Footer/Footer';
+import { motion } from 'framer-motion'
 
 interface TodoProps {
   getMode: (data: string) => void;
@@ -141,10 +142,9 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
           },
         });
       }
-      console.log(response)
-      setLoading(false)
-      setInputValue('')
       fetchData()
+      setInputValue('')
+      setLoading(false)
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         setLoading(false)
@@ -411,112 +411,136 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
 
 
   return (
-    <div className='todo-list'>
-      <div className="todo-list-container" >
-        <div className="todo-title" onClick={() => setShowPicker(false)}>
-          <div className="todo-left">
-            <div className="todo-left-item">
-              <span className="todo-title-name">TODO</span>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
+      <div className='todo-list'>
+        <div className="todo-list-container" >
+          <div className="todo-title" onClick={() => setShowPicker(false)}>
+            <div className="todo-left">
+              <div className="todo-left-item">
+                <span className="todo-title-name">TODO</span>
+              </div>
+            </div>
+            <div className="todo-right">
+              <div className="todo-right-item">
+                <button className="logout" onClick={handleLogout}>LOGOUT</button>
+              </div>
             </div>
           </div>
-          <div className="todo-right">
-            <div className="todo-right-item">
-              <button className="logout" onClick={handleLogout}>LOGOUT</button>
-            </div>
-          </div>
-        </div>
 
-        <div className="todo-new-task">
-          <form onSubmit={handleSubmitTodo}>
-            <div className="new-task-row">
-              <div className="new-task-left">
-                <div className="emoji-left" onClick={() => setShowPicker(!showPicker)}>
-                  <span className="material-symbols-outlined emoji-icon" onClick={() => setShowPicker(!showPicker)}>
-                    mood
-                  </span>
+          <div className="todo-new-task">
+            <form onSubmit={handleSubmitTodo}>
+              <div className="new-task-row">
+                <div className="new-task-left">
+                  <div className="emoji-left" onClick={() => setShowPicker(!showPicker)}>
+                    <span className="material-symbols-outlined emoji-icon" onClick={() => setShowPicker(!showPicker)}>
+                      mood
+                    </span>
+                  </div>
+                </div>
+                <div className="new-task-center">
+                  <div className="new-task-input">
+                    <input value={inputValue} onChange={handleTodoChange} type="text" className='todo-input' placeholder='Add a new task ! Eg: Coding, Hacking...' />
+                  </div>
+                </div>
+                <div className="new-task-right">
+                  <div className="new-task-send">
+                    <button type='submit' className="send-button">
+                      {loading ?
+                        <CircularProgress size='1.5em' />
+                        :
+                        <span className="material-symbols-outlined emoji-icon">
+                          send
+                        </span>
+                      }
+                    </button>
+                  </div>
                 </div>
               </div>
-              <div className="new-task-center">
-                <div className="new-task-input">
-                  <input value={inputValue} onChange={handleTodoChange} type="text" className='todo-input' placeholder='Add a new task ! Eg: Coding, Hacking...' />
+            </form>
+            {showPicker && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+              >
+                <div className="emoji-picker-container">
+                  <EmojiPicker height={400} width={285} onEmojiClick={onClick} />
                 </div>
-              </div>
-              <div className="new-task-right">
-                <div className="new-task-send">
-                  <button type='submit' className="send-button">
-                    {loading ?
-                      <CircularProgress size='1.5em' />
-                      :
-                      <span className="material-symbols-outlined emoji-icon">
-                        send
-                      </span>
-                    }
-                  </button>
+              </motion.div>
+            )}
+          </div>
+          {todosCount ?
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              <div className="added-todo-container">
+                <div className="todo-info-row">
+                  <div className="todo-info-left">
+                    <div className="info-left">
+                      <span className="info">All Tasks: <button className="info-count-left">{todosCount}</button></span>
+                    </div>
+                  </div>
+                  <div className="todo-info-right">
+                    <div className="info-right">
+                      <span className="info">Completed Tasks: <button className="info-count">{doneCount} of {todosCount}</button></span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </form>
-          {showPicker && (
-            <div className="emoji-picker-container">
-              <EmojiPicker height={400} width={285} onEmojiClick={onClick} />
-            </div>
-          )}
-        </div>
-        {todosCount ?
-          <div className="added-todo-container">
-            <div className="todo-info-row">
-              <div className="todo-info-left">
-                <div className="info-left">
-                  <span className="info">All Tasks: <button className="info-count-left">{todosCount}</button></span>
-                </div>
-              </div>
-              <div className="todo-info-right">
-                <div className="info-right">
-                  <span className="info">Completed Tasks: <button className="info-count">{doneCount} of {todosCount}</button></span>
-                </div>
-              </div>
-            </div>
-            {/* <hr className='hr-todo'/> */}
-            {todoLoading ?
-              <div className="todo-item-row-loading">
-                <CircularProgress size='3em' color='success' />
-              </div>
-              :
-              <div className="todo-item-row">
-                {todos && todos.map((todo, index) => (
-                  <TodoItem onComplete={handleComplete} onDelete={handledelete} getMode={getMode} todo={todo} key={index} />
-                ))}
-              </div>
-            }
+                {/* <hr className='hr-todo'/> */}
+                {todoLoading ?
+                  <div className="todo-item-row-loading">
+                    <CircularProgress size='3em' color='success' />
+                  </div>
+                  :
+                  <div className="todo-item-row">
+                    {todos && todos.map((todo, index) => (
+                      <TodoItem onComplete={handleComplete} onDelete={handledelete} getMode={getMode} todo={todo} key={index} />
+                    ))}
+                  </div>
+                }
 
-            <div className="todo-action-row">
-              <div className="action-left">
-                <span className="actions" onClick={handleClearAll}>CLEAR ALL</span>
-              </div>
-              <div className="action-center">
-                <div className="action-center-item">
-                  <span className="actions" onClick={fetchData}>ALL TASKS</span>
+                <div className="todo-action-row">
+                  <div className="action-left">
+                    <span className="actions" onClick={handleClearAll}>CLEAR ALL</span>
+                  </div>
+                  <div className="action-center">
+                    <div className="action-center-item">
+                      <span className="actions" onClick={fetchData}>ALL TASKS</span>
+                    </div>
+                    <div className="action-center-item">
+                      <span className="actions" onClick={() => handlegetTodo('false')}>ACTIVE</span>
+                    </div>
+                    <div className="action-center-item">
+                      <span className="actions" onClick={() => handlegetTodo('true')}>COMPLETED</span>
+                    </div>
+                  </div>
+                  <div className="action-right">
+                    <span className="actions" onClick={handleClearCompleted}>CLEAR COMPLETED</span>
+                  </div>
                 </div>
-                <div className="action-center-item">
-                  <span className="actions" onClick={() => handlegetTodo('false')}>ACTIVE</span>
-                </div>
-                <div className="action-center-item">
-                  <span className="actions" onClick={() => handlegetTodo('true')}>COMPLETED</span>
-                </div>
               </div>
-              <div className="action-right">
-                <span className="actions" onClick={handleClearCompleted}>CLEAR COMPLETED</span>
+            </motion.div    >
+            :
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              <div className="added-todo-container-warn">
+                <span className="warn-text">NO TASKS ADDED !</span>
               </div>
-            </div>
-          </div>
-          :
-          <div className="added-todo-container-warn">
-            <span className="warn-text">NO TASKS ADDED !</span>
-          </div>
-        }
+            </motion.div>
+          }
+        </div>
+        <FooterRow />
       </div>
-      <FooterRow/>
-    </div>
+    </motion.div >
   )
 }
 
