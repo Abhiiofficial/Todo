@@ -4,7 +4,6 @@ import TodoSignUp from '../../Components/TodoSignUp/TodoSignUp'
 import Todo from '../../Components/Todo/Todo'
 import { useState } from 'react'
 import FooterRow from '../../Components/Footer/Footer'
-import { motion } from 'framer-motion'
 
 const TodoList = () => {
   const [mode, setMode] = useState<string>("login")
@@ -13,21 +12,15 @@ const TodoList = () => {
     setMode(data)
   }
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-    >
-      <div className='todo'>
-        <div className="bg-container">
-          <img src='https://i.pinimg.com/originals/30/f4/0c/30f40c02566f9981446a10d52ece94bd.png' alt="" className="bg-image" />
-        </div>
-        {mode === 'login' && <TodoLogin getMode={getMode} />}
-        {mode === 'signup' && <TodoSignUp getMode={getMode} />}
-        {mode === 'todo' && <Todo getMode={getMode} />}
-        <FooterRow />
+    <div className='todo'>
+      <div className="bg-container">
+        <img src='https://i.pinimg.com/originals/30/f4/0c/30f40c02566f9981446a10d52ece94bd.png' alt="" className="bg-image" />
       </div>
-    </motion.div>
+      {mode === 'login' && <TodoLogin getMode={getMode} />}
+      {mode === 'signup' && <TodoSignUp getMode={getMode} />}
+      {mode === 'todo' && <Todo getMode={getMode} />}
+      {mode === 'todo' && <FooterRow />}
+    </div>
   )
 }
 
