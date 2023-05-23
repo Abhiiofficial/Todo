@@ -61,6 +61,25 @@
         font-size: 13px;
     }
 }
+.title{
+    display: flex;
+    text-align: start;
+    left: 0;
+    font-family: 'lato';
+    font-size: 16px;
+    font-weight: 600;
+    font-family: "Lato", sans-serif;
+    line-height: 1.71;
+    letter-spacing: 1.24px;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+@media only screen and (max-width: 767px) {
+    .title {
+        font-size: 13px;
+    }
+}
+
 
 .todo-time-row {
     display: flex;

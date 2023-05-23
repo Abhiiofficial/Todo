@@ -1,22 +1,23 @@
-.todo-component {
+.todo-signup-component {
     position: absolute;
     height: 350px;
-    width: 850px;
+    width: 700px;
     background-color: #fff;
     top: 50%;
     left: 50%;
-    padding: 80px 30px;
+    padding: 60px 30px;
     display: flex;
     border-radius: 10px;
     box-shadow: 0px 2px 5px rgb(255, 201, 201);
     transform: translate(-50%, -50%);
-} 
+}
 
-@media screen and (max-width: 767px) {
-    .todo-component {
-        width: 250px;
+@media only screen and (max-width: 767px) {
+    .todo-signup-component {
+        width: 280px;
         height: 40%;
-        box-shadow: 0px 0px 9px rgb(255, 207, 207);
+        padding: 75px 30px;
+        box-shadow: 0px 1px 3px rgb(236, 236, 236);
     }
 }
 
@@ -72,7 +73,7 @@
     }
 }
 
-.signup-input-row{
+.signup-input-row {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -89,7 +90,7 @@
 
 @media screen and (max-width: 767px) {
     .vertical-hr {
-       display: none;
+        display: none;
     }
 }
 
@@ -115,7 +116,29 @@
     }
 }
 
-.loading{
+.signup-loading {
+    width: 275px;
+    padding: 7px 5px;
+    border-radius: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    gap: 5px;
+    background-color: rgb(255, 226, 226);
+    border: 1px solid rgb(255, 163, 163);
+    font-size: 20px;
+    color: #ff0000;
+    transition: all 0.2s ease;
+}
+
+@media screen and (max-width: 767px) {
+    .signup-loading {
+        width: 247px;
+    }
+}
+
+.loading {
     background-color: #ffffff;
     color: red;
     font-size: 16px;
@@ -133,7 +156,7 @@
     font-size: 13px;
 }
 
-.ey-icon{
+.ey-icon {
     cursor: pointer;
 }
 

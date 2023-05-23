@@ -20,6 +20,7 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
   const [todos, setTodos] = useState([]);
   const [todosCount, setTodoscount] = useState(0);
   const [doneCount, setDonecount] = useState(0);
+  const [todoLoading, setTodoLoading] = useState(false);
 
   function onClick(emojiData: EmojiClickData) {
     setSelectedEmoji(emojiData.unified);
@@ -57,6 +58,7 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
 
   const fetchData = async () => {
     if (token) {
+      setTodoLoading(true)
       try {
         const response = await axios.get('https://love-todo-app.onrender.com/api/v1/user/getTodos', {
           headers: {
@@ -66,7 +68,9 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
         setDonecount(response?.data.doneCount)
         setTodoscount(response?.data.count)
         setTodos(response?.data.data)
+        setTodoLoading(false)
       } catch (error: unknown) {
+        setTodoLoading(false)
         if (axios.isAxiosError(error)) {
           if (error.response?.data.statusCode === 401) {
             handleLogout()
@@ -91,7 +95,7 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
     const value = event.target.value;
 
     // Validate the todo input
-    if (value.match(/^[/.,{}[\]<>\s]+$/)) {
+    if (value.match(/[./\[\]{}<>]/)) {
       setError(true);
       toast.error('Invalid characters are not allowed.', {
         position: 'top-center',
@@ -107,6 +111,7 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
   }
   const handleSubmitTodo = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setShowPicker(false)
     if (error) {
       toast.error('Invalid task name', {
         position: 'top-center',
@@ -135,11 +140,14 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
           },
         });
       }
+      console.log(response)
+      setLoading(false)
       setInputValue('')
       fetchData()
-      setLoading(false)
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
+        setLoading(false)
+        console.log(error.response?.data.status)
         if (error.response?.data.statusCode === 401) {
           handleLogout()
           toast.error('Token Expired.', {
@@ -151,7 +159,31 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
             iconTheme: {
               primary: '#713200',
               secondary: '#FFFAEE',
+            }
+          });
+        } else if (error.response?.data.statusCode === 400) {
+          toast.error(error.response?.data.error, {
+            style: {
+              border: '1px solid #713200',
+              padding: '16px',
+              color: '#713200',
             },
+            iconTheme: {
+              primary: '#713200',
+              secondary: '#FFFAEE',
+            }
+          });
+        } else {
+          toast.error('Something went wrong !', {
+            style: {
+              border: '1px solid #713200',
+              padding: '16px',
+              color: '#713200',
+            },
+            iconTheme: {
+              primary: '#713200',
+              secondary: '#FFFAEE',
+            }
           });
         }
       }
@@ -161,6 +193,7 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
 
   const handledelete = async (todoId: string) => {
     if (token) {
+      setTodoLoading(true)
       try {
         const response = await axios.delete('https://love-todo-app.onrender.com/api/v1/user/delete/' + todoId, {
           headers: {
@@ -169,8 +202,20 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
         });
         if (response) {
           fetchData()
+          setTodoLoading(false)
+          toast(response?.data?.message,
+            {
+              icon: '👏',
+              style: {
+                borderRadius: '10px',
+                background: '#333',
+                color: '#fff',
+              },
+            }
+          );
         }
       } catch (error: unknown) {
+        setTodoLoading(false)
         if (axios.isAxiosError(error)) {
           if (error.response?.data.statusCode === 401) {
             handleLogout()
@@ -194,6 +239,7 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
 
   const handleComplete = async (todoId: string) => {
     if (token) {
+      setTodoLoading(true)
       try {
         const response = await axios.put('https://love-todo-app.onrender.com/api/v1/user/completed', { todoId }, {
           headers: {
@@ -201,10 +247,23 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
           }
         });
         if (response) {
+
           fetchData()
           setDonecount(doneCount + 1)
+          setTodoLoading(false)
+          toast(response?.data?.message,
+            {
+              icon: '👏',
+              style: {
+                borderRadius: '10px',
+                background: '#333',
+                color: '#fff',
+              },
+            }
+          );
         }
       } catch (error: unknown) {
+        setTodoLoading(false)
         if (axios.isAxiosError(error)) {
           if (error.response?.data.statusCode === 401) {
             handleLogout()
@@ -228,6 +287,7 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
 
   const handlegetTodo = async (getValue: string) => {
     if (token) {
+      setTodoLoading(true)
       try {
         const response = await axios.get(`https://love-todo-app.onrender.com/api/v1/user/getActiveTodo?isCompleted=` + getValue, {
           headers: {
@@ -237,7 +297,9 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
         setDonecount(response?.data.doneCount)
         setTodoscount(response?.data.count)
         setTodos(response?.data.data)
+        setTodoLoading(false)
       } catch (error: unknown) {
+        setTodoLoading(false)
         if (axios.isAxiosError(error)) {
           if (error.response?.data.statusCode === 401) {
             handleLogout()
@@ -261,6 +323,7 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
 
   const handleClearCompleted = async () => {
     if (token) {
+      setTodoLoading(true)
       try {
         const response = await axios.delete(`https://love-todo-app.onrender.com/api/v1/user/deleteCompleted`, {
           headers: {
@@ -279,7 +342,9 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
             secondary: '#FFFAEE',
           },
         });
+        setTodoLoading(false)
       } catch (error: unknown) {
+        setTodoLoading(false)
         if (axios.isAxiosError(error)) {
           if (error.response?.data.statusCode === 401) {
             handleLogout()
@@ -346,8 +411,8 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
 
   return (
     <div className='todo-list'>
-      <div className="todo-list-container">
-        <div className="todo-title">
+      <div className="todo-list-container" >
+        <div className="todo-title" onClick={() => setShowPicker(false)}>
           <div className="todo-left">
             <div className="todo-left-item">
               <span className="todo-title-name">TODO</span>
@@ -364,7 +429,7 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
           <form onSubmit={handleSubmitTodo}>
             <div className="new-task-row">
               <div className="new-task-left">
-                <div className="emoji-left">
+                <div className="emoji-left" onClick={() => setShowPicker(!showPicker)}>
                   <span className="material-symbols-outlined emoji-icon" onClick={() => setShowPicker(!showPicker)}>
                     mood
                   </span>
@@ -390,18 +455,13 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
               </div>
             </div>
           </form>
-          {showPicker &&
-            <>
-              {/* <div className="emoji-picker-container-one" >
-                <EmojiPicker height={370} onEmojiClick={onClick} />
-              </div> */}
-              <div className="emoji-picker-container" >
-                <EmojiPicker height={400} width={285} onEmojiClick={onClick} />
-              </div>
-            </>
-          }
+          {showPicker && (
+            <div className="emoji-picker-container">
+              <EmojiPicker height={400} width={285} onEmojiClick={onClick} />
+            </div>
+          )}
         </div>
-        {todosCount &&
+        {todosCount ?
           <div className="added-todo-container">
             <div className="todo-info-row">
               <div className="todo-info-left">
@@ -416,11 +476,17 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
               </div>
             </div>
             {/* <hr className='hr-todo'/> */}
-            <div className="todo-item-row">
-              {todos && todos.map((todo, index) => (
-                <TodoItem onComplete={handleComplete} onDelete={handledelete} getMode={getMode} todo={todo} key={index} />
-              ))}
-            </div>
+            {todoLoading ?
+              <div className="todo-item-row-loading">
+                <CircularProgress size='3em' color='success' />
+              </div>
+              :
+              <div className="todo-item-row">
+                {todos && todos.map((todo, index) => (
+                  <TodoItem onComplete={handleComplete} onDelete={handledelete} getMode={getMode} todo={todo} key={index} />
+                ))}
+              </div>
+            }
 
             <div className="todo-action-row">
               <div className="action-left">
@@ -441,6 +507,10 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
                 <span className="actions" onClick={handleClearCompleted}>CLEAR COMPLETED</span>
               </div>
             </div>
+          </div>
+          :
+          <div className="added-todo-container-warn">
+            <span className="warn-text">NO TASKS ADDED !</span>
           </div>
         }
       </div>

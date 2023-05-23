@@ -68,7 +68,7 @@ const TodoSignUp: React.FC<TodoSignUpProps> = ({ getMode }) => {
         } catch (error:unknown) {
             setLoading(false)
             if(error){
-                toast.error('Login failed !', {
+                toast.error('Signup failed !', {
                     position: 'top-center',
                     style:{
                         border:'1px solid red'
@@ -79,7 +79,7 @@ const TodoSignUp: React.FC<TodoSignUpProps> = ({ getMode }) => {
     };
 
     return (
-        <div className="todo-component">
+        <div className="todo-signup-component">
             <div className="todo-signup-left">
                 <div className="todo-signup">
                     <img src={signup} alt="" className="todo-signup-image" />
@@ -157,7 +157,7 @@ const TodoSignUp: React.FC<TodoSignUpProps> = ({ getMode }) => {
                             </div>
                             :
                             <div className="signup-input-row">
-                                <button  className="signup loading">Please wait...  <CircularProgress size="1em" sx={{color:'red',backgroundColor:'#fff'}}/></button>
+                                <button  className="signup-loading">Please wait...  <CircularProgress size="1em" sx={{color:'red'}}/></button>
                             </div>
                             }
 

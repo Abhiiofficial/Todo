@@ -1,24 +1,25 @@
-.todo-component {
+.todo-login-component {
     position: absolute;
-    height: 300px;
-    width: 850px;
+    height: 350px;
+    width: 700px;
     background-color: #fff;
     top: 50%;
     left: 50%;
     padding: 30px;
     display: flex;
     border-radius: 10px;
-    box-shadow: 0px 5px 10px rgb(255, 183, 183);
+    box-shadow: 0px 3px 5px rgb(255, 230, 230);
     transform: translate(-50%, -50%);
 }
 
-@media screen and (min-width: 767px) {
-    .todo-component {
-        width: 250px;
-        height: 30%;
-        box-shadow: 0px 0px 9px rgb(255, 207, 207);
+@media only screen and (max-width: 767px) {
+    .todo-login-component {
+        width: 280px;
+        height: 50%;
+        box-shadow: 0px 1px 3px rgb(236, 236, 236);
     }
 }
+
 
 .todo-login-left {
     flex: 6;
@@ -84,7 +85,7 @@
 
 @media screen and (max-width: 767px) {
     .vertical-hr {
-       display: none;
+        display: none;
     }
 }
 
@@ -110,6 +111,28 @@
     }
 }
 
+.login-loading {
+    width: 275px;
+    padding: 7px 5px;
+    border-radius: 35px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: rgb(255, 239, 239);
+    border: 1px solid rgb(255, 163, 163);
+    font-size: 20px;
+    color: #ff0000;
+    transition: all 0.2s ease;
+}
+
+@media screen and (max-width: 767px) {
+    .login-loading {
+        width: 247px;
+    }
+}
+
 .login-title-name {
     font-size: 25px;
 }
@@ -128,11 +151,11 @@
     cursor: pointer;
 }
 
-.eye-icon{
+.eye-icon {
     cursor: pointer;
 }
 
-.login-input-row{
+.login-input-row {
     display: flex;
     align-items: center;
     justify-content: center;

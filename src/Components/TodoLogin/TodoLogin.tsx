@@ -50,10 +50,20 @@ const TodoLogin: React.FC<TodoLoginProps> = ({ getMode }) => {
                 password
             });
             if (response.data.statusCode === 200) {
+                toast(response?.data?.message,
+                    {
+                        icon: '👏',
+                        style: {
+                            borderRadius: '10px',
+                            background: '#333',
+                            color: '#fff',
+                        },
+                    }
+                );
                 toast.success('Login successful', {
                     position: 'top-center',
                 })
-                Cookies.set('todo_token', response.data?.accessToken)
+                Cookies.set('todo_token', response?.data?.accessToken)
                 changeMode()
             }
             setLoading(false)
@@ -71,7 +81,7 @@ const TodoLogin: React.FC<TodoLoginProps> = ({ getMode }) => {
     };
 
     return (
-        <div className="todo-component">
+        <div className="todo-login-component">
             <div className="todo-login-left">
                 <div className="todo-login">
                     <img src={login} alt="" className="todo-login-image" />
@@ -126,7 +136,7 @@ const TodoLogin: React.FC<TodoLoginProps> = ({ getMode }) => {
                                 </div>
                                 :
                                 <div className="login-input-row">
-                                    <button className="login loading">Please wait... <CircularProgress size='1em' sx={{ color: 'red', backgroundColor: '#fff' }} /></button>
+                                    <button className="login-loading">Please wait... <CircularProgress size='1em' sx={{ color: 'red' }} /></button>
                                 </div>
                             }
                             <div className="login-input-row">

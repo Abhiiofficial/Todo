@@ -19,6 +19,13 @@
     }
 }
 
+.todo-item-row-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 17rem;
+}
+
 .todo-title {
     display: flex;
     flex-direction: row;
@@ -213,7 +220,7 @@
 @media only screen and (max-width: 767px) {
     .emoji-picker-container {
         display: flex;
-  transform: translate(-10%, -0%);
+        transform: translate(-10%, -0%);
     }
 }
 
@@ -230,6 +237,7 @@
 @media only screen and (max-width: 767px) {
     .added-todo-container {
         padding: 9px;
+         box-shadow: 0px 1px 2px rgb(238, 238, 238);
     }
 }
 
@@ -352,4 +360,27 @@
 
 .actions:hover {
     color: red;
+}
+
+.warn-text{
+    font-size: 20px;
+}
+
+.added-todo-container-warn {
+    margin-top: 10px;
+    height: 400px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 2px 5px rgb(221, 221, 221);
+}
+
+@media only screen and (max-width: 767px) {
+    .added-todo-container-warn {
+        padding: 9px;
+          box-shadow: 0px 1px 3px rgb(233, 233, 233);
+    }
 }
