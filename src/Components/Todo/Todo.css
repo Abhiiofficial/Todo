@@ -238,7 +238,7 @@
 @media only screen and (max-width: 767px) {
     .added-todo-container {
         padding: 9px;
-        height: 410px;
+        height: 440px;
         box-shadow: 0px 1px 2px rgb(238, 238, 238);
     }
 }
@@ -315,7 +315,7 @@
 
 @media only screen and (max-width: 767px) {
     .todo-item-row {
-        height: 340px;
+        height: 365px;
     }
 }
 
