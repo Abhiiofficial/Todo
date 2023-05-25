@@ -100,7 +100,7 @@ const Todo: React.FC<TodoProps> = ({ getMode }) => {
     // Validate the todo input
     if (value.match(/[./\[\]{}<>]/)) {
       setError(true);
-      toast.error('Invalid characters are not allowed.', {
+      toast.error('([./\[\]{}<>]/) etc... are not allowed.', {
         position: 'top-center',
         style: {
           border: '1px soild red'

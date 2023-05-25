@@ -68,8 +68,9 @@ const TodoSignUp: React.FC<TodoSignUpProps> = ({ getMode }) => {
             }
         } catch (error: unknown) {
             setLoading(false)
-            if (error) {
-                toast.error('Signup failed !', {
+            console.log(error)
+            if (axios.isAxiosError(error)) {
+                toast.error(error?.response?.data?.error, {
                     position: 'top-center',
                     style: {
                         border: '1px solid red'

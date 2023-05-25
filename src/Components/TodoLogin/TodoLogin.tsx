@@ -68,10 +68,10 @@ const TodoLogin: React.FC<TodoLoginProps> = ({ getMode }) => {
                 changeMode()
             }
             setLoading(false)
-        } catch (error: unknown) {
+         } catch (error: unknown) {
             setLoading(false)
-            if (error) {
-                toast.error('Login failed !', {
+                if (axios.isAxiosError(error)) {
+                toast.error(error?.response?.data?.message, {
                     position: 'top-center',
                     style: {
                         border: '1px solid red'
